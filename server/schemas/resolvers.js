@@ -28,15 +28,9 @@ const resolvers = {
         .populate('friends')
         .populate('thoughts');
     },
-    // use parent has placeholder parameter
-    // access username argument from second param
     thoughts: async (parent, { username }) => {
-    // user ternary operator to check if username exists
-    // if it doesn't return empty obj
-    const params = username ? { username } : {};
-    // use find to sort through Thought model
-    // then sort in descending order
-    return Thought.find().sort({ createdAt: -1 })
+      const params = username ? { username } : {};
+      return Thought.find(params).sort({ createdAt: -1 });
     },
     thought: async (parent, { _id }) => {
       return Thought.findOne({ _id });
@@ -111,4 +105,3 @@ const resolvers = {
 };
 
 module.exports = resolvers;
-
